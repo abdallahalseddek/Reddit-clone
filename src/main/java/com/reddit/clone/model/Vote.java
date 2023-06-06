@@ -1,26 +1,20 @@
 package com.reddit.clone.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import org.antlr.v4.runtime.misc.NotNull;
+import lombok.Data;
 
 @Entity
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@Table(name = "vote")
+@Data
 public class Vote {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long voteId;
-    private VoteType voteType;
+    private Long id;
+    private enum voteType{UP,DOWN};
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "postId", referencedColumnName = "postId")
-    private Post post;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "userId", referencedColumnName = "userId")
+    @JoinColumn(referencedColumnName = "user_id", name = "user_id")
     private User user;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(referencedColumnName = "post_id", name = "post_id")
+    private Post post;
 }

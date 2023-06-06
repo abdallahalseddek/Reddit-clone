@@ -1,23 +1,20 @@
 package com.reddit.clone.model;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Data;
 
 import java.time.Instant;
 
-@Setter
-@Getter
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
+@Table(name = "user")
+@Data
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userId;
-    private String username;
+    @Column(name = "user_id")
+    private Long id;
+    private String name;
     private String password;
     private String email;
-    private Instant created;
-    private boolean enabled;
-
+    private Instant createdAt;
 }
